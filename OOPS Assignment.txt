@@ -1,0 +1,210 @@
+1) create a class with constructors and destructors.
+create array of instances and observe how program behaves.
+
+#include<iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+	int num;
+public:
+	Myclass()
+	{
+
+	}
+	Myclass(int k)
+	{
+		this->num = k;
+	}
+	void getNum()
+	{
+		cout << "Number is " << num<<endl;
+	}
+	void setNum(int k)
+	{
+		this->num = num;
+	}
+
+};
+
+
+int main()
+{
+	Myclass m[2];
+       //Myclass M1[3]={100,200,300};
+	Myclass m3(100);
+	for (int i = 0; i < 2; i++)
+	{
+		int number;
+		cin >> number;
+		m[i].setNum(number) ;
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		int number;
+		cin >> number;
+		m[i].getNum();
+	}
+	m3.getNum();
+
+	return 0;
+}
+
+
+2) create a class with constructors and destructor.
+create 2 instances on stack and 1 instance on heap. observe the invocation of constructors and destructors.
+
+#include<iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+	int num;
+public:
+	Myclass()
+	{
+
+	}
+	Myclass(int k)
+	{
+		this->num = k;
+	}
+	void getNum()
+	{
+		cout << "Number is " << num << endl;
+	}
+	void setNum(int k)
+	{
+		this->num = num;
+	}
+};
+
+int main()
+{
+	Myclass m1;
+	Myclass m2(100);
+	//Myclass m3[2] = { 100,200 };
+	Myclass *m4= new Myclass(300);
+	m1.getNum();
+	m2.getNum();
+	/*
+	for (int i = 0; i<2; i++)
+	{
+		m3[i].getNum();
+	}
+	*/
+	m4->getNum();
+
+}
+
+
+4) create a class.
+accept from user, how many instances are required.
+Accordingly create array of instances dynamically.
+Now make sure that u call destructor for each and every instances.
+
+#include<iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+	int num;
+public:
+	Myclass()
+	{
+
+	}
+	Myclass(int k)
+	{
+		this->num = k;
+	}
+	void getNum()
+	{
+		cout << "Number is " << num << endl;
+	}
+	void setNum(int k)
+	{
+		cout << "Enter the number:" << endl;
+		this->num = num;
+	}
+};
+
+int main()
+{
+	int size;
+	cout << "Enter the size " << endl;
+	cin >> size;
+	Myclass* m1 = new Myclass[size];
+
+	for (int i = 0; i < size; i++)
+	{
+		int number;
+		cin >> number;
+		m1[i].setNum(number);
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		m1[i].getNum();
+	}
+}
+
+
+5) create a class, define different types of constructors. in main create n number of objects. At the end display how many constructors are created for a class.
+
+#include<iostream>
+using namespace std;
+
+class MyClass
+{
+private:
+	int num;
+	static int count;
+public:
+	MyClass()
+	{
+		num = 0;
+		count++;
+	}
+	MyClass(int num)
+	{
+		this->num = num;
+		count++;
+	}
+	static int getCount()
+	{
+		return count;
+	}
+	MyClass(MyClass& ref)
+	{
+		num = ref.num;
+		count++;
+	}
+	~MyClass()
+	{
+		count--;
+	}
+};
+int MyClass::count = 0;
+void main()
+{
+	MyClass m1, m2(300), m3(400), m4;
+	MyClass* m5 = new MyClass;
+	MyClass m10, m11(300), m12(400), m13;
+	MyClass* m6 = new MyClass(800);
+	cout << MyClass::getCount()<<endl;
+	MyClass m7 = m2;
+	cout << MyClass::getCount()<<endl;
+	delete m5;
+	cout << MyClass::getCount()<<endl;
+	delete m6;
+	cout << MyClass::getCount()<<endl;
+}
+
+
+
+
