@@ -1,0 +1,369 @@
+1)using cin and cout, accept name,address,age of a person and print it.
+#include <iostream>
+
+using namespace std;
+int main(){
+	string name,adress;
+	int age;
+	cout << "Enter the name:- " << endl;
+	cin>> name;
+
+	cout << "Enter the adress:- " << endl;
+	cin >> adress;
+
+	cout << "Enter the age:- " << endl;
+	cin >> age;
+}
+
+
+
+
+
+
+
+
+2) create following structure
+struct book
+{
+	char bid[5];
+	char name[30];
+	int price;
+};
+
+==>
+#include <iostream>
+using namespace std;
+
+struct Book
+{
+    char bid[5];
+    char name[20];
+    int price;
+};
+
+int main()
+{
+    Book b1;
+    {
+        cout << "Enter the book ID: " << endl;
+        cin >> b1.bid;
+        cout << "Enter Name: " << endl;
+        cin >> b1.name;
+        cout << "Enter Price: " << endl;
+        cin >> b1.price;
+
+    }
+    cout << "BookID: " << b1.bid << endl;
+    cout << "Name: " << b1.name << endl;
+    cout << "Price: " << b1.price<< endl;
+
+    return 0;
+}
+
+
+
+
+
+
+3) create a structure "Employee" 
+with members 
+	int id
+	char name[20];
+	char desig[20];
+now access it using
+a) array 
+b) DMA
+
+
+3-A)==>
+#include <iostream>
+#include <cstring> 
+
+struct book
+{
+    char bid[5];
+    char name[30];
+    int price;
+};
+
+int main() {
+
+    struct book myBook;
+
+    
+    strcpy(myBook.bid, "B001");
+    strcpy(myBook.name, "Sample Book");
+    myBook.price = 20;
+
+    
+    std::cout << "Book ID: " << myBook.bid << std::endl;
+    std::cout << "Book Name: " << myBook.name << std::endl;
+    std::cout << "Book Price: $" << myBook.price << std::endl;
+
+    return 0;
+}
+
+
+
+
+
+
+3-B)==>
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+struct book
+{
+    char bid[5];
+    char name[30];
+    int price;
+};
+
+int main() {
+    int numBooks;
+
+    cout << "Enter the number of books: ";
+    cin >> numBooks;
+
+    
+    book* books = new book[numBooks];
+
+    for (int i = 0; i < numBooks; ++i) {
+        cout << "Enter Book ID (up to 4 characters) for Book " << i + 1 << ": ";
+        cin >> books[i].bid;
+
+        cout << "Enter Book Name (up to 29 characters) for Book " << i + 1 << ": ";
+        cin.ignore();
+        cin.getline(books[i].name, sizeof(books[i].name));
+
+        cout << "Enter Book Price for Book " << i + 1 << ": ";
+        cin >> books[i].price;
+    }
+}
+    
+4) create a library in C++ in which,
+write a function which will accept 2 numbers and return the difference between 2 numbers
+write appropriate header file.write a client code to access this library.
+
+==>
+
+
+
+
+
+
+
+
+
+5)given
+	void disp(int); function.
+
+now create a function pointer and call this function using function pointer.
+==>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6)write a function to swap 2 given numbers using pointers.
+==>
+#include <iostream>
+using namespace std;
+void swapNumbers(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int num1 = 5;
+    int num2 = 10;
+
+    cout << "Before swapping: num1 = " << num1 << ", num2 = " << num2 <<endl;
+
+    swapNumbers(&num1, &num2);
+
+    cout << "After swapping: num1 = " << num1 << ", num2 = " << num2 <<endl;
+
+    return 0;
+}
+
+
+
+7)accept from user how many initials he has in his name, now allocate a memory accordingly and accept his initial. [use new operator]
+
+==>
+
+
+#include <iostream>
+
+int main() {
+    int numInitials;
+
+    std::cout << "Enter the number of initials in your name: ";
+    std::cin >> numInitials;
+
+    char* initials = new char[numInitials];
+
+    for (int i = 0; i < numInitials; ++i) {
+        std::cout << "Enter initial " << i + 1 << ": ";
+        std::cin >> initials[i];
+    }
+
+
+    std::cout << "Your initials are: ";
+    for (int i = 0; i < numInitials; ++i) {
+        std::cout << initials[i] << " ";
+    }
+    std::cout << std::endl;
+
+    delete[] initials;
+
+    return 0;
+}
+
+8)write a function which can accept minimum 3 characters and maximum 5 characters and display them. ( use "default arguments")
+
+#include <iostream>
+#include <string>
+
+void displayString(const std::string& str, int minLength = 3, int maxLength = 5) {
+    int length = str.length();
+
+    if (length >= minLength && length <= maxLength) {
+        std::cout << "Entered string: " << str << std::endl;
+    } else {
+        std::cout << "Invalid string length. Please enter a string with " << minLength << " to " << maxLength << " characters." << std::endl;
+    }
+}
+
+int main() {
+    std::string userInput;
+
+    std::cout << "Enter a string with 3 to 5 characters: ";
+    std::cin >> userInput;
+
+    displayString(userInput); // Call the function with default arguments
+
+    return 0;
+}
+
+9)write a function which takes 3 arguments
+variable, pointer and a reference.(any datatype)
+invoke this function and show how "call by value","call by address" and "call by reference" will work.
+==>
+
+#include <iostream>
+
+template <typename T>
+void demonstrateCallByValue(T var, T* ptr, T& ref) {
+    std::cout << "Inside the function:" << std::endl;
+    std::cout << "Call by Value (Variable): " << var << std::endl;
+    std::cout << "Call by Address (Pointer): " << *ptr << std::endl;
+    std::cout << "Call by Reference: " << ref << std::endl;
+
+    // Modify the values
+    var = 20;
+    *ptr = 30;
+    ref = 40;
+}
+
+int main() {
+    int num = 10;
+    int* ptr = &num;
+    int& ref = num;
+
+    std::cout << "Before calling the function:" << std::endl;
+    std::cout << "Original Value (Variable): " << num << std::endl;
+    std::cout << "Original Value (Pointer): " << *ptr << std::endl;
+    std::cout << "Original Value (Reference): " << ref << std::endl;
+
+    demonstrateCallByValue(num, ptr, ref);
+
+    std::cout << "After calling the function:" << std::endl;
+    std::cout << "Value (Variable) after function call: " << num << std::endl;
+    std::cout << "Value (Pointer) after function call: " << *ptr << std::endl;
+    std::cout << "Value (Reference) after function call: " << ref << std::endl;
+
+    return 0;
+}
+
+
+
+
+10)define 3 different structures and initialize their members.
+now write 3 different functions,but with the same name.
+these functions will accept each structure respectively and display their members.
+
+
+==>#include <iostream>
+
+// Define three different structures
+struct Student {
+    std::string name;
+    int age;
+};
+
+struct Car {
+    std::string make;
+    std::string model;
+    int year;
+};
+
+struct Employee {
+    std::string firstName;
+    std::string lastName;
+    int employeeId;
+};
+
+// Define a function with the same name that accepts a Student structure
+void displayInfo(const Student& student) {
+    std::cout << "Student Name: " << student.name << std::endl;
+    std::cout << "Student Age: " << student.age << std::endl;
+}
+
+// Define a function with the same name that accepts a Car structure
+void displayInfo(const Car& car) {
+    std::cout << "Car Make: " << car.make << std::endl;
+    std::cout << "Car Model: " << car.model << std::endl;
+    std::cout << "Car Year: " << car.year << std::endl;
+}
+
+// Define a function with the same name that accepts an Employee structure
+void displayInfo(const Employee& employee) {
+    std::cout << "Employee Name: " << employee.firstName << " " << employee.lastName << std::endl;
+    std::cout << "Employee ID: " << employee.employeeId << std::endl;
+}
+
+int main() {
+    // Initialize instances of the three structures
+    Student student1 = {"Alice", 20};
+    Car car1 = {"Toyota", "Camry", 2022};
+    Employee employee1 = {"John", "Doe", 1001};
+
+    // Call the displayInfo function with each structure
+    std::cout << "Student Info:" << std::endl;
+    displayInfo(student1);
+
+    std::cout << "\nCar Info:" << std::endl;
+    displayInfo(car1);
+
+    std::cout << "\nEmployee Info:" << std::endl;
+    displayInfo(employee1);
+
+    return 0;
+}
+
