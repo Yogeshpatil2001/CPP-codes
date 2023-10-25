@@ -1,0 +1,252 @@
+
+1) create a class with constructors and destructors.
+create array of instances and observe how program behaves.
+==>
+#include <iostream>
+
+class MyClass {
+public:
+    // Constructor
+    MyClass(int id) : id_(id) {
+        std::cout << "Constructing MyClass with ID " << id_ << std::endl;
+    }
+
+    // Destructor
+    ~MyClass() {
+        std::cout << "Destructing MyClass with ID " << id_ << std::endl;
+    }
+
+private:
+    int id_;
+};
+
+int main() {
+    const int arraySize = 3;
+    MyClass* myArray[arraySize];
+
+    // Create instances and store them in the array
+    for (int i = 0; i < arraySize; ++i) {
+        myArray[i] = new MyClass(i + 1);
+    }
+
+    // Use the instances
+
+    // Clean up by deleting the instances
+    for (int i = 0; i < arraySize; ++i) {
+        delete myArray[i];
+    }
+
+    return 0;
+}
+
+
+2) create a class with constructors and destructor.
+create 2 instances on stack and 1 instance on heap. observe the invocation of constructors and destructors.
+
+
+==>
+#include <iostream>
+
+class MyClass {
+public:
+    // Constructor
+    MyClass(int id) : id_(id) {
+        std::cout << "Constructing MyClass with ID " << id_ << std::endl;
+    }
+
+    // Destructor
+    ~MyClass() {
+        std::cout << "Destructing MyClass with ID " << id_ << std::endl;
+    }
+
+private:
+    int id_;
+};
+
+int main() {
+    // Create two instances on the stack
+    MyClass stackInstance1(1);
+    MyClass stackInstance2(2);
+
+    // Create one instance on the heap
+    MyClass* heapInstance = new MyClass(3);
+
+    // Use the instances
+
+    // Clean up the instance on the heap
+    delete heapInstance;
+
+    return 0;
+}
+
+3) create a class "MyClass1"
+with members and member function "disp1().
+create another class "MyClass2"
+with members and member function "disp2().
+now try to invoke disp1() from disp2()
+in the main() function, create instances of both the classes and invoke their member functions.
+
+==>
+#include <iostream>
+
+class MyClass1 {
+public:
+    void disp1() {
+        std::cout << "This is disp1() from MyClass1" << std::endl;
+    }
+};
+
+class MyClass2 {
+public:
+    void disp2() {
+        std::cout << "This is disp2() from MyClass2" << std::endl;
+        
+        // Invoke disp1() from MyClass1
+        MyClass1 obj1;
+        obj1.disp1();
+    }
+};
+
+int main() {
+    // Create instances of both classes
+    MyClass1 obj1;
+    MyClass2 obj2;
+
+    // Invoke member functions
+    obj1.disp1();
+    obj2.disp2();
+
+    return 0;
+}
+
+
+4) create a class.
+accept from user, how many instances are required.
+Accordingly create array of instances dynamically.
+Now make sure that u call destructor for each and every instances.
+
+==>
+
+#include <iostream>
+
+class MyClass {
+public:
+    MyClass(int id) : id_(id) {
+        std::cout << "Constructing MyClass with ID " << id_ << std::endl;
+    }
+
+    ~MyClass() {
+        std::cout << "Destructing MyClass with ID " << id_ << std::endl;
+    }
+
+private:
+    int id_;
+};
+
+int main() {
+    int numInstances;
+
+    // Prompt the user for the number of instances
+    std::cout << "Enter the number of instances to create: ";
+    std::cin >> numInstances;
+
+    // Create an array of pointers to MyClass instances
+    MyClass** instanceArray = new MyClass*[numInstances];
+
+    // Dynamically create instances based on user input
+    for (int i = 0; i < numInstances; ++i) {
+        instanceArray[i] = new MyClass(i + 1);
+    }
+
+    // Use the instances if needed
+
+    // Delete the instances and free memory
+    for (int i = 0; i < numInstances; ++i) {
+        delete instanceArray[i];
+    }
+
+    // Delete the array of pointers
+    delete[] instanceArray;
+
+    return 0;
+}
+
+
+5) create a class, define different types of constructors. in main create n number of objects. At the end display how many constructors are created for a class.
+
+
+==>#include <iostream>
+
+class MyClass {
+public:
+    // Static member variable to count the number of constructors
+    static int constructorCount;
+
+    // Default constructor
+    MyClass() {
+        constructorCount++;
+        std::cout << "Default constructor called" << std::endl;
+    }
+
+    // Parameterized constructor
+    MyClass(int value) {
+        constructorCount++;
+        std::cout << "Parameterized constructor called with value: " << value << std::endl;
+    }
+
+    // Copy constructor
+    MyClass(const MyClass& other) {
+        constructorCount++;
+        std::cout << "Copy constructor called" << std::endl;
+    }
+
+    // Destructor
+    ~MyClass() {
+        std::cout << "Destructor called" << std::endl;
+    }
+};
+
+// Initialize the static member variable
+int MyClass::constructorCount = 0;
+
+int main() {
+    int n;
+    std::cout << "Enter the number of objects to create: ";
+    std::cin >> n;
+
+    MyClass* objects = new MyClass[n];
+
+    // Use the objects if needed
+
+    // Delete the array of objects
+    delete[] objects;
+
+    // Display the number of constructors created
+    std::cout << "Total constructors created: " << MyClass::constructorCount << std::endl;
+
+    return 0;
+}
+
+
+6)Developer Side
+	create a class "book" with
+		int bookid
+		char *bookname
+		int price
+
+	define parameterized constructor only for this class.
+	define 3 getter functions.
+
+create necessary header and lib file and distribute it to the client.
+
+Client Side
+
+	 create 2 instances
+	1 on stack and 1 on heap.
+	pass the necessary values while creating instances.
+	call the getter functions.
+
+
+
+
+==>
