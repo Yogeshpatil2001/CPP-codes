@@ -1,0 +1,57 @@
+1) class Number
+   {
+       int num;
+   }
+In the main function,
+Number n1(8),n2(4),n3(20),n4(6),n5;
+n5=n1-n2*n3/n4;
+
+#include <iostream>
+using namespace std;
+
+class Myclass
+{
+private:
+    int number;
+public:
+    Myclass()
+    {
+
+    }
+    Myclass(int num)
+    {
+        this->number = num;
+    }
+    int getNumber()
+    {
+       cout<<"Number is " << number<<endl;
+       return number;
+    }
+    Myclass& operator -(Myclass& ref)
+    {
+        this->number = this->number - ref.number;
+        return *this;
+    }
+    Myclass& operator *(Myclass& ref)
+    {
+        this->number = this->number * ref.number;
+        return *this;
+    }
+    Myclass& operator /(Myclass& ref)
+    {
+        this->number = this->number /ref.number;
+        return *this;
+    }
+    
+};
+
+int main()
+{
+    Myclass n1(8);
+    Myclass n2(4);
+    Myclass n3(20);
+    Myclass n4(68080);
+    Myclass n5;
+    n5 = n1 - n2 * n3 / n4;
+    n5.getNumber();
+}
